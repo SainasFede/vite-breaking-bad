@@ -35,7 +35,7 @@ export default {
       color: white;
     };
     p{
-      color: #6e716d;
+      color: lightgrey;
     }
   }
 </style>

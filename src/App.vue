@@ -4,6 +4,7 @@ import axios from 'axios'
 import {store} from '../src/data/store'
 import AppHeader from './components/AppHeader.vue';
 import CharacterList from './components/CharacterList.vue';
+import Select from './components/Select.vue';
 
 export default {
   name: 'App',
@@ -14,12 +15,17 @@ export default {
   },
   components:{
     AppHeader,
-    CharacterList
+    CharacterList,
+    Select
   },
   methods:{
     getCharacter(){
       store.isLoaded = false;
-      axios.get(store.apiUrl)
+      axios.get(store.apiUrl, {
+        params: {
+          category: store.seriesSearch
+        }
+      })
       .then( result => {
       store.characterList = result.data
       store.isLoaded = true;
@@ -38,7 +44,8 @@ export default {
 
 <template>
 <AppHeader />
-<CharacterList />
+<Select  @changeSeries="getCharacter()"/>
+<CharacterList/>
 
 </template>
 
